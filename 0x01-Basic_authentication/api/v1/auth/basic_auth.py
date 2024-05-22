@@ -60,7 +60,8 @@ class BasicAuth(Auth):
                 decoded_base64_authorization_header.strip(),
             )
             if field_match is not None:
-                user, password = field_match.group('user'), field_match.group('password')
+                user = field_match.group('user')
+                password = field_match.group('password')
                 return user, password
         return None, None
 
