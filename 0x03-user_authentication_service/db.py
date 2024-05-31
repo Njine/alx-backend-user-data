@@ -55,10 +55,10 @@ class DB:
                 values.append(value)
             else:
                 raise InvalidRequestError()
-        
+
         result = (self._session.query(User)
-                              .filter(tuple_(*fields).in_([tuple(values)]))
-                              .first())
+                  .filter(tuple_(*fields).in_([tuple(values)]))
+                  .first())
         if result is None:
             raise NoResultFound()
         return result
@@ -69,12 +69,11 @@ class DB:
         user = self.find_user_by(id=user_id)
         if user is None:
             return
-        
+
         for key, value in kwargs.items():
             if hasattr(User, key):
                 setattr(user, key, value)
             else:
                 raise ValueError()
-        
-        self._session.commit()
 
+        self._session.commit()
